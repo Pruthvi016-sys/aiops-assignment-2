@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: shard-validation-job
+  labels:
+    app: shard-validator
+spec:
+  completions: 8
+  parallelism: 8
+  completionMode: Indexed
+  backoffLimit: 4
+  template:
+    metadata:
+      labels:
+        app: shard-validator
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: validator
+          image: shard-validator:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          resources:
+            requests:
+              cpu: "500m"
+            limits:
+              cpu: "500m"

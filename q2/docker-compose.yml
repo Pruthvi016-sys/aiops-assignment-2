@@ -1,0 +1,22 @@
+
+services:
+  cache:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.multistage
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=cache
+      - REDIS_PORT=6379
+    depends_on:
+      cache:
+        condition: service_healthy

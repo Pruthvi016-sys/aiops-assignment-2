@@ -1,0 +1,9 @@
+Ground truth (for your own verification against pod output later):
+  shard_0.csv -> 4 invalid rows
+  shard_1.csv -> 5 invalid rows
+  shard_2.csv -> 6 invalid rows
+  shard_3.csv -> 7 invalid rows
+  shard_4.csv -> 8 invalid rows
+  shard_5.csv -> 9 invalid rows
+  shard_6.csv -> 10 invalid rows
+  shard_7.csv -> 11 invalid rows

@@ -1,0 +1,25 @@
+FROM python:3.11 AS builder
+
+WORKDIR /build
+
+COPY requirements.txt .
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY data_gen.py train_model.py .
+RUN python data_gen.py && python train_model.py
+
+# --- Stage 2: minimal runtime ---
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder /build/model.joblib .
+COPY app.py .
+
+ENV PATH="/opt/venv/bin:$PATH"
+
+EXPOSE 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
