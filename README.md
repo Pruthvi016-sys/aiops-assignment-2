@@ -2,7 +2,7 @@
 
 This repository contains all deliverables for the Module 3 assignment (Infrastructure & Containerization): a naive vs. multi-stage Docker build, multi-container orchestration with Docker Compose, a Kubernetes Indexed Job for parallel batch validation, and a Kubernetes Deployment with self-healing and rolling-update behavior.
 
-**2-page written report (all four questions):** [`2-page_pdf_writeup.pdf`](./2-page_pdf_writeup.pdf)
+**2-page written report (all four questions):** [`2-page_pdf_writeup.pdf`](https://github.com/Pruthvi016-sys/aiops-assignment-2/blob/main/2_page_pdf_writeup.pdf)
 
 **Demo video (2–5 min walkthrough of all four questions):** `<google-drive-link-here>`
 
